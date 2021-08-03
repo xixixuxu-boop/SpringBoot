@@ -1,0 +1,21 @@
+server:
+  port: 8888
+
+carofjzc:
+  brand: BWO
+  price: 100000
+spring:
+  #数据库连接配置
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/ors?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+    username: root
+    password: 15879305710
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  #mybatis等相关配置
+
+  mybatis:
+    #mapper配置文件
+
+    mapper-locations: classpath:mapper/*.xml;
+    #type-aliases-package: com.example.demo.mapper
+
