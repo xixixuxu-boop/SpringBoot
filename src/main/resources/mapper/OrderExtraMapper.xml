@@ -11,7 +11,18 @@
         <result column="field_value" property="fieldValue" jdbcType="VARCHAR" />
     </resultMap>
 
+    <select id="getFieldKey" resultMap="BaseResultMap">
+        select * from order_extra where field_key=#{fieldKey};
+    </select>
+
     <select id="findAll" resultMap="BaseResultMap">
         select * from ors.order_extra
     </select>
+
+<!--    <select id="getOrderExtra" resultType="com.example.demo.bean.OrderExtra">-->
+<!--        select * from order_extra where id=#{id}-->
+<!--    </select>-->
+
+
+
 </mapper>

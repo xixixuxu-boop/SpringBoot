@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @AllArgsConstructor
 @Component
-@ConfigurationProperties(prefix = "carofjzc")
+@ConfigurationProperties(prefix = "carofjzc")//配置属性，和yml中的属性对应
 public class Car {
     private String brand;
     private Integer price;

@@ -5,11 +5,14 @@ import com.example.demo.bean.Car;
 import com.example.demo.bean.OrderExtra;
 import com.example.demo.service.OrderExtraService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * @description:
  * @author: jiangzhangcheng
@@ -30,6 +33,22 @@ public class OrderExtraController {
     @Autowired
     private OrderExtraService userService;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    @RequestMapping("/query")
+    public Map<String, Object> map(){
+        List<Map<String, Object>> maps = jdbcTemplate.queryForList("select * from order_extra");
+        for(Map map : maps){
+            Set<Map.Entry> ms = map.entrySet();
+            for(Map.Entry entry : ms){
+                System.out.print("Key = "+entry.getKey()+",value="+entry.getValue()+",  ");
+            }
+            System.out.println();
+        }
+        return maps.get(1);
+    }
+
     @RequestMapping("/abc")//前端返回地址
     public List<Animal> getName(){
         List<Animal> res = new ArrayList<>();
@@ -43,4 +62,15 @@ public class OrderExtraController {
     public List<OrderExtra> getOrder(){
         return userService.findAll();
     }//返回的数据写给浏览器
+
+    @ResponseBody//返回json注解
+    @GetMapping("/getOrderExtra")
+    public OrderExtra getOrderExtra(@RequestParam("id") Long id){
+        return userService.getOrderExtra(id);
+    }
+    @ResponseBody//返回json注解
+    @GetMapping("/getFieldKey")
+    public List<OrderExtra> getFieldKey(@RequestParam("fieldKey") String fieldKey){
+        return userService.getFieldKey(fieldKey);
+    }
 }
